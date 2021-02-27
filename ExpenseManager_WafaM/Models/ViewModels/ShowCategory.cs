@@ -9,7 +9,8 @@ namespace ExpenseManager_WafaM.Models.ViewModels
     public class ShowCategory
     {
         //info about the category
-        public CategoryDto Category { get; set; }
+        public CategoryDto CategoryId { get; set; }
+        public CategoryDto CategoryName { get; set; }
 
         public IEnumerable<ExpenseDto> Expenses { get; set; }
     }

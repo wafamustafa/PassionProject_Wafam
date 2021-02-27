@@ -29,7 +29,7 @@ namespace ExpenseManager_WafaM.Models
         [DisplayFormat(DataFormatString = "{0:dd/mm/yyyy")]
         public DateTime ExpenseDate { get; set; }
 
-        
+        public ICollection<Category> Categories { get; set; }
 
     }
 

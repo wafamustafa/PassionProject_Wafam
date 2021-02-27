@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<ExpenseManager_WafaM.Models.CategoryDto>
 
 @{
-    ViewBag.Title = "View";
+    ViewBag.Title = "List";
 }
 
-<h2>View</h2>
+<h2>List</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,6 +12,7 @@
 <table class="table">
     <tr>
         <th>
+            <!--Change the name-->
             @Html.DisplayNameFor(model => model.CategoryName)
         </th>
         <th></th>
@@ -25,7 +26,8 @@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.CategoryId }) |
             @Html.ActionLink("Details", "Details", new { id=item.CategoryId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CategoryId })
+            <!--changed to post delete method-->
+            @Html.ActionLink("Delete", "DeleteConfirm", new { id=item.CategoryId })
         </td>
     </tr>
 }

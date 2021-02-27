@@ -63,7 +63,7 @@ namespace ExpenseManager_WafaM.Controllers
             {
                 //get the category selected
                 CategoryDto SelectedCategory = response.Content.ReadAsAsync<CategoryDto>().Result;
-                ViewModel.Category = SelectedCategory;
+                ViewModel.CategoryId = SelectedCategory;
 
                 //now show the expenses under that category Id
                 url = "CategoryData/GetExpensesForCategory/" + id;

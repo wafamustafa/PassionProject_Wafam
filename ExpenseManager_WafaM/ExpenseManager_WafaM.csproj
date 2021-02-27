@@ -214,12 +214,21 @@
     <Compile Include="Migrations\202102192130323_Wafam_20210219_1630.Designer.cs">
       <DependentUpon>202102192130323_Wafam_20210219_1630.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202102262250112_20210226_1750.cs" />
+    <Compile Include="Migrations\202102262250112_20210226_1750.Designer.cs">
+      <DependentUpon>202102262250112_20210226_1750.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102270325301_20210226_stillgoing.cs" />
+    <Compile Include="Migrations\202102270325301_20210226_stillgoing.Designer.cs">
+      <DependentUpon>202102270325301_20210226_stillgoing.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Expense.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ViewModels\UpdateExpense.cs" />
     <Compile Include="Models\ViewModels\ShowCategory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -281,13 +290,15 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Category\List.cshtml" />
-    <Content Include="Views\Category\Delete.cshtml" />
     <Content Include="Views\Category\Details.cshtml" />
     <Content Include="Views\Category\Create.cshtml" />
+    <Content Include="Views\Category\DeleteConfirm.cshtml" />
+    <Content Include="Views\Expense\List.cshtml" />
+    <Content Include="Views\Expense\Create.cshtml" />
+    <Content Include="Views\Expense\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Expense\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -320,6 +331,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202102192130323_Wafam_20210219_1630.resx">
       <DependentUpon>202102192130323_Wafam_20210219_1630.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102262250112_20210226_1750.resx">
+      <DependentUpon>202102262250112_20210226_1750.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102270325301_20210226_stillgoing.resx">
+      <DependentUpon>202102270325301_20210226_stillgoing.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

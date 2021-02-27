@@ -82,10 +82,10 @@ namespace ExpenseManager_WafaM.Controllers
         
 
         /// <summary>
-        /// Gets a list of expenses. This list can only be accessed when the user is logged in
+        /// Gets a list of expenses per category. This list can only be accessed when the user is logged in
         /// Code reference: varsity_w_auth
         /// </summary>
-        /// <param name="id">input categpry id</param>
+        /// <param name="id">input category id</param>
         /// <returns>A list of expenses associated with the category Id</returns>
         /// <example>
         ///GET: api/CategoryData/GetExpensesForCategory/{id}
@@ -142,7 +142,7 @@ namespace ExpenseManager_WafaM.Controllers
             db.Categories.Add(Category);
             db.SaveChanges();
 
-            return Ok(Category.CategoryName);
+            return Ok(Category.CategoryId);
         }
 
         /// <summary>
@@ -159,16 +159,16 @@ namespace ExpenseManager_WafaM.Controllers
         public IHttpActionResult DeleteCategory(int id)
         {
             //Pseudo code:: if the category doesnt exists return not found. if there is a category with the corresponding id remove and save changes
-            Category category = db.Categories.Find(id);
-            if (category == null)
+            Category Category = db.Categories.Find(id);
+            if (Category == null)
             {
                 return NotFound();
             }
 
-            db.Categories.Remove(category);
+            db.Categories.Remove(Category);
             db.SaveChanges();
 
-            return Ok(category);
+            return Ok();
         }
 
         protected override void Dispose(bool disposing)

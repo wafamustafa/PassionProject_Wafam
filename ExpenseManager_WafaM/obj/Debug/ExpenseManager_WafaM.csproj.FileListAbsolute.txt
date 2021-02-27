@@ -119,3 +119,5 @@ C:\Users\zuhai\source\repos\ExpenseManager_WafaM\ExpenseManager_WafaM\obj\Debug\
 C:\Users\zuhai\source\repos\ExpenseManager_WafaM\ExpenseManager_WafaM\obj\Debug\ExpenseManager_WafaM.Migrations.Wafam_20210218_1408.resources
 C:\Users\zuhai\source\repos\ExpenseManager_WafaM\ExpenseManager_WafaM\obj\Debug\ExpenseManager_WafaM.Migrations.Wafam_20210219_1541.resources
 C:\Users\zuhai\source\repos\ExpenseManager_WafaM\ExpenseManager_WafaM\obj\Debug\ExpenseManager_WafaM.Migrations.Wafam_20210219_1630.resources
+C:\Users\zuhai\source\repos\ExpenseManager_WafaM\ExpenseManager_WafaM\obj\Debug\ExpenseManager_WafaM.Migrations._20210226_1750.resources
+C:\Users\zuhai\source\repos\ExpenseManager_WafaM\ExpenseManager_WafaM\obj\Debug\ExpenseManager_WafaM.Migrations._20210226_stillgoing.resources

@@ -27,6 +27,7 @@ namespace ExpenseManager_WafaM.Controllers
         /// </example>
 
         [ResponseType(typeof(IEnumerable<ExpenseDto>))]
+        [Route("api/ExpenseData/GetExpenses")]
         public IHttpActionResult GetExpenses()
         {
             List<Expense> Expenses = db.Expenses.ToList();
@@ -42,6 +43,7 @@ namespace ExpenseManager_WafaM.Controllers
                     ItemName = Expense.ItemName,
                     Amount = Expense.Amount,
                     ExpenseDate = Expense.ExpenseDate,
+                    //I messed up here and realized I added category id as the fk instead of using category name...
                     CategoryId = Expense.CategoryId
 
                 };
@@ -55,38 +57,35 @@ namespace ExpenseManager_WafaM.Controllers
 
 
         /// <summary>
-        /// Gets a list of expenses by date. This list can only be accessed when the user is logged in
+        /// Gets expense by itemid.
         /// Code reference: varsity_w_auth
         /// </summary>
-        /// <param name="ExpenseDate">input expense date format dd/mm/yyyy</param>
-        /// <returns>A list of expenses associated by date</returns>
+        /// <param name="ItemId">input expense id</param>
+        /// <returns>A list of expenses associated by item name</returns>
         /// <example>
-        ///GET: api/CategoryData/GetExpensesByDate/{DateTime}
+        ///GET: api/ExpenseData/FindExpense/{id}
         /// </example>
-
-        //not working!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        [ResponseType(typeof(IEnumerable<ExpenseDto>))]
-        public IHttpActionResult GetExpensesByDate(DateTime ExpenseDate)
+        [HttpGet]
+        [ResponseType(typeof(ExpenseDto))]
+        public IHttpActionResult FindExpense(int id)
         {
-            //Pseudo code:: for each expense in expense db output the itemId, itemname, amount and category for the particular expense date
-            List<Expense> Expenses = db.Expenses.Where(e => e.ExpenseDate == ExpenseDate).ToList();
-            List<ExpenseDto> ExpenseDtos = new List<ExpenseDto> { };
+            Expense Expense = db.Expenses.Find(id);
 
-            //This is where we are able to pick what information will be displayed
-            foreach (var Expense in Expenses)
+            if (Expense == null)
             {
-                ExpenseDto NewExpense = new ExpenseDto
-                {
-                    ItemId = Expense.ItemId,
-                    ItemName = Expense.ItemName,
-                    Amount = Expense.Amount,
-                    CategoryId = Expense.CategoryId
-                };
+                return NotFound();
 
-                ExpenseDtos.Add(NewExpense);
             }
+            ExpenseDto ExpenseDto = new ExpenseDto
+            {
+                ItemId = Expense.ItemId,
+                ItemName = Expense.ItemName,
+                Amount = Expense.Amount,
+                ExpenseDate = Expense.ExpenseDate,
+                CategoryId = Expense.CategoryId
+            };
 
-            return Ok(ExpenseDtos);
+                return Ok(ExpenseDto);
         }
 
         /// <summary>
@@ -121,7 +120,19 @@ namespace ExpenseManager_WafaM.Controllers
             {
                 db.SaveChanges();
             }
-            catch (DbUpdateConcurrencyException) { }
+            catch (DbUpdateConcurrencyException) 
+            { 
+                if (!ExpenseExists(id))
+                {
+                    return NotFound();
+
+                } else
+                {
+
+                    throw;
+
+                }
+            }
 
 
             return StatusCode(HttpStatusCode.NoContent);
@@ -157,12 +168,12 @@ namespace ExpenseManager_WafaM.Controllers
         /// <summary>
         /// Deletes expense from the database
         /// </summary>
-        /// <param name="Expense">itemId as input</param>
+        /// <param name="id">itemId as input</param>
         /// <returns></returns>
         /// <example>
         ///POST:api/ExpenseData/DeleteExpense
         /// </example>
-        [ResponseType(typeof(Expense))]
+        [HttpPost]
         public IHttpActionResult DeleteExpense(int id)
         {
             Expense expense = db.Expenses.Find(id);
@@ -174,8 +185,54 @@ namespace ExpenseManager_WafaM.Controllers
             db.Expenses.Remove(expense);
             db.SaveChanges();
 
-            return Ok(expense);
+            return Ok();
+        }
+
+        ///<summary>
+        ///Finds expense in the system 
+        ///</summary>
+        ///<param name="id">Expnese id</param>
+        ///<returns>True if expense exists </returns>
+        private bool ExpenseExists(int id)
+        {
+            return db.Expenses.Count(e => e.ItemId == id) > 0;
         }
     }
 
 }
+
+/// <summary>
+/// Gets a list of expenses by itemname. This list can only be accessed when the user is logged in this code is not working 
+/// Code reference: varsity_w_auth
+/// </summary>
+/// <param name="ItemName">input expense name</param>
+/// <returns>A list of expenses associated by item name</returns>
+/// <example>
+///GET: api/CategoryData/GetExpensesByName/{ItemName}
+/// </example>
+
+//not working!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+/*[ResponseType(typeof(IEnumerable<ExpenseDto>))]
+public IHttpActionResult GetExpensesByName(string ItemName)
+{
+    //Pseudo code:: for each expense in expense db output the itemId, itemname, amount and category for the particular expense date
+    List<Expense> Expenses = db.Expenses.Where(e => e.ItemName == ItemName).ToList();
+    List<ExpenseDto> ExpenseDtos = new List<ExpenseDto> { };
+
+    //This is where we are able to pick what information will be displayed
+    foreach (var Expense in Expenses)
+    {
+        ExpenseDto NewExpense = new ExpenseDto
+        {
+            ItemId = Expense.ItemId,
+            ItemName = Expense.ItemName,
+            Amount = Expense.Amount,
+            ExpenseDate = Expense.ExpenseDate,
+            CategoryId = Expense.CategoryId
+        };
+
+        ExpenseDtos.Add(NewExpense);
+    }
+
+    return Ok(ExpenseDtos);
+}*/
