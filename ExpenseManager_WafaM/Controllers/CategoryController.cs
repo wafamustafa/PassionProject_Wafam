@@ -103,7 +103,7 @@ namespace ExpenseManager_WafaM.Controllers
             if (response.IsSuccessStatusCode)
             {
                 int Categoryid = response.Content.ReadAsAsync<int>().Result;
-                return RedirectToAction("Details", new { id = Categoryid });
+                return RedirectToAction("List", new { id = Categoryid });
             }
             else
             {

@@ -72,14 +72,16 @@ namespace ExpenseManager_WafaM.Controllers
         public ActionResult Create(Expense expense)
         {
             //getting lost in this chunck of code
+            //update: understianding a code bit better
             string url = "ExpenseData/AddExpense";
             HttpContent content = new StringContent(jss.Serialize(expense));
             content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             HttpResponseMessage response = client.PostAsync(url, content).Result;
             if(response.IsSuccessStatusCode)
             {
+                //redirect to details was did not make sense and UX so redirect back to list to see the updated list
                 int ItemId = response.Content.ReadAsAsync<int>().Result;
-                return RedirectToAction("Details", new { id = ItemId });
+                return RedirectToAction("List", new { id = ItemId });
 
             } else
             {
@@ -104,10 +106,10 @@ namespace ExpenseManager_WafaM.Controllers
                 ExpenseDto SelectedExpense = response.Content.ReadAsAsync<ExpenseDto>().Result;
                 ViewModel.Expense = SelectedExpense;
 
-                url = "CategoryData/GetCategory";
-                response = client.GetAsync(url).Result;
-                IEnumerable<CategoryDto> PickedCategory = response.Content.ReadAsAsync<IEnumerable<CategoryDto>>().Result;
-                ViewModel.Categories = PickedCategory;
+                //url = "CategoryData/GetCategory";
+                //response = client.GetAsync(url).Result;
+                //IEnumerable<CategoryDto> PickedCategory = response.Content.ReadAsAsync<IEnumerable<CategoryDto>>().Result;
+                //ViewModel.Categories = PickedCategory;
 
                 return View(ViewModel);
             }
